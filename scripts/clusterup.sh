@@ -139,7 +139,7 @@ function startFullNodeWithExpiry() {
          --mine --miner.etherbase ${validatorAddr[$validatorIndex]} --rpc.allow-unprotected-txs --allow-insecure-unlock --light.serve 50 \
          --gcmode full --ws --datadir ${workspace}/clusterNode/node${nodeNum} \
          --metrics  --metrics.addr "0.0.0.0" --metrics.port "$((6060+$nodeNum))" --pprof --pprof.port "$((6070+$nodeNum))" --http.corsdomain "*" --rpc.txfeecap 0 \
-         --state-expiry --state-expiry.remote ${remote} > ${workspace}/clusterNode/node${nodeNum}/geth-$(date +"%Y%m%d_%H%M").log 2>&1 &
+         --state-expiry --state-expiry.remote ${remote} --state-expiry.epoch1 30 --state-expiry.epoch2 60 --state-expiry.period 30 > ${workspace}/clusterNode/node${nodeNum}/geth-$(date +"%Y%m%d_%H%M").log 2>&1 &
 
         echo "start validator $nodeNum, enable state expiry, miner: ${validatorAddr[$validatorIndex]}"
         nodeNum=$(($nodeNum+1))
